@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\HealthCheckRepository;
+use ErrorException;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -16,9 +17,11 @@ readonly class HealthCheckService
     }
 
     /**
+     * @param string $uuid
      * @return array
+     * @throws ErrorException
      */
-    public function check(): array
+    public function check(string $uuid): array
     {
         $services = [
             'db' => $this->checkDatabase(),
@@ -34,6 +37,7 @@ readonly class HealthCheckService
         }
 
         $this->repository->create([
+            'owner' => $uuid,
             'status' => $status,
             'services' => $status !== ResponseAlias::HTTP_OK ? $services : null,
         ]);

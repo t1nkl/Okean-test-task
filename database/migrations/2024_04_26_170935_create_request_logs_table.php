@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('request_logs', function (Blueprint $table) {
             $table->id();
+            $table->uuid('owner');
             $table->integer('status');
             $table->string('services')->nullable();
             $table->timestamps();

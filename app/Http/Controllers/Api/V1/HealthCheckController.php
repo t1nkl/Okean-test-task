@@ -27,7 +27,7 @@ class HealthCheckController extends Controller
             return response()->json(['error' => 'UUID header missing.'], ResponseAlias::HTTP_BAD_REQUEST);
         }
 
-        $result = $this->service->check();
+        $result = $this->service->check($uuid);
 
         return response()->json(
             Arr::get($result, 'services', []),

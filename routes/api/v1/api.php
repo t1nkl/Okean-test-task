@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('health-check', [HealthCheckController::class, 'index'])
+    ->middleware('throttle:60,1')
     ->name('health_check.index');
