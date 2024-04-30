@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class HealthCheck extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'owner',
+        'status',
+        'services',
+    ];
+    protected $casts = [
+        'services' => 'array',
+    ];
 }
